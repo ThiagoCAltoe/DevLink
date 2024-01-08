@@ -29,7 +29,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 O DevLinks é um agregador de links para usar como cartão de visitas online.
 
-- [Acesse o projeto finalizado, online](https://thiagocaltoe.github.io/DevLink/)
+- [Acesse o projeto finalizado, online](http://links.thiagocostaaltoe.com.br/)
 
 ## :memo: Licença
 
