@@ -7,3 +7,8 @@ function toggleMode() {
     html.classList.add("light")
   }
 }
+
+// Redirect to HTTPS
+var host = "links.thiagocostaaltoe.com.br";
+if ((host == window.location.host) && (window.location.protocol != "https:"))
+    window.location.protocol = "https";
