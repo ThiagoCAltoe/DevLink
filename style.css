@@ -12,6 +12,7 @@
   --surface-color-hover: rgba(255, 255, 255, 0.05);
   --hilight-color: rgba(255, 255, 255, 0.2);
   --switch-bg-url: url(./assets/moon-stars.svg);
+  --gradient: linear-gradient(45deg, #ff6b6b, #4ecdc4);
 }
 
 .light {
@@ -22,11 +23,13 @@
   --surface-color-hover: rgba(0, 0, 0, 0.02);
   --hilight-color: rgba(0, 0, 0, 0.1);
   --switch-bg-url: url(./assets/sun.svg);
+  --gradient: linear-gradient(45deg, #4ecdc4, #ff6b6b);
 }
 
 body {
   background: var(--bg-url) no-repeat top center/cover;
   height: 100vh;
+  background-attachment: fixed;
 }
 
 body * {
@@ -39,44 +42,83 @@ body * {
   max-width: 588px;
   margin: 56px auto 0px;
   padding: 0 24px;
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Profile */
 #profile {
   text-align: center;
   padding: 24px;
+  position: relative;
+}
+
+#profile::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 2px;
+  background: var(--gradient);
+  border-radius: 2px;
 }
 
 #profile img {
   width: 112px;
+  border-radius: 50%;
+  border: 2px solid var(--stroke-color);
+  transition: all 0.3s ease;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+#profile img:hover {
+  transform: scale(1.05);
+  border-color: var(--text-color);
 }
 
 #profile p {
   font-weight: 500;
   line-height: 24px;
   margin-top: 8px;
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 1.1em;
 }
 
 /* Switch */
 #switch {
   position: relative;
   width: 64px;
-
   margin: 4px auto;
+  cursor: pointer;
 }
+
 #switch button {
   width: 32px;
   height: 32px;
   background: white var(--switch-bg-url) no-repeat center;
   border: 0;
   border-radius: 50%;
-
   position: absolute;
   top: 50%;
   z-index: 1;
   transform: translateY(-50%);
-
   animation: slide-out 0.4s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .light #switch button {
@@ -113,27 +155,31 @@ ul li a {
   display: flex;
   justify-content: center;
   align-items: center;
-
+  gap: 8px;
   padding: 16px 24px;
-
   background: var(--surface-color);
   border: 1px solid var(--stroke-color);
   border-radius: 8px;
-
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
-
   text-decoration: none;
   font-weight: 500;
-
-  transition: background 0.2s;
+  transition: all 0.3s ease;
 }
 
-/*pseudo-selector */
+ul li a ion-icon {
+  font-size: 20px;
+  transition: transform 0.3s ease;
+}
 
 ul li a:hover {
   background: var(--surface-color-hover);
   border: 1.5px solid var(--text-color);
+  transform: translateY(-2px);
+}
+
+ul li a:hover ion-icon {
+  transform: scale(1.1);
 }
 
 /* Social Links */
@@ -149,11 +195,22 @@ ul li a:hover {
   align-items: center;
   justify-content: center;
   padding: 16px;
-  transition: background 0.2s;
+  transition: all 0.3s ease;
   border-radius: 50%;
+  background: var(--surface-color);
+  border: 1px solid var(--stroke-color);
+  width: 56px;
+  height: 56px;
 }
+
+#social-links a ion-icon {
+  font-size: 24px;
+  color: var(--text-color);
+}
+
 #social-links a:hover {
   background: var(--hilight-color);
+  transform: translateY(-3px);
 }
 
 footer {
@@ -167,6 +224,7 @@ footer {
   :root {
     --bg-url: url(./assets/bg-desktop.jpg);
   }
+
   .light {
     --bg-url: url(./assets/bg-desktop-light.jpg);
   }
@@ -177,6 +235,7 @@ footer {
   from {
     left: 0;
   }
+
   to {
     left: 50%;
   }
@@ -186,6 +245,7 @@ footer {
   from {
     left: 50%;
   }
+
   to {
     left: 0;
   }
